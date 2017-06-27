@@ -3,6 +3,6 @@ services:
   rpi-svn:
     build: .
     ports:
-     - "8083:80"
+     - "8083:3690"
     volumes:
      - /media/usbraid/svn:/var/svn
