@@ -10,7 +10,7 @@ RUN apt-get update \
     && mkdir ­p /var/svn \
     && echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf \
     && a2enconf fqdn
-
+ 
 COPY dav_svn.conf /etc/apache2/mods­available/
 
 RUN  /etc/init.d/apache2 restart

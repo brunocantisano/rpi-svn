@@ -1,3 +1,3 @@
 #!/bin/bash
 #
-docker build -t brunocantisano/rpi-svn .
+docker build -t paperinik/rpi-svn .
