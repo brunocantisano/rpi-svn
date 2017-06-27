@@ -5,15 +5,15 @@ LABEL version latest
 LABEL description Simple Subversion Container
 
 RUN apt-get update \
-    && apt-get install -y subversion \
+    && apt-get install subversion -y \
+    && apt-get install apache2 libapache2-svn -y \
     && mkdir ­p /var/svn \
-    && apt­get install -y apache2 \
-    && apt-get install -y libapache2­svn
+    && echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf \
+    && a2enconf fqdn
 
 COPY dav_svn.conf /etc/apache2/mods­available/
 
-RUN  /etc/init.d/apache2 restart \
-     && chown ­R www­data:www­data /var/svn
+RUN  /etc/init.d/apache2 restart
 
 VOLUME /var/svn
 
