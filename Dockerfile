@@ -4,8 +4,7 @@ MAINTAINER Bruno Cantisano <bruno.cantisano@gmail.com>
 LABEL version latest
 LABEL description Simple Subversion Container
 
-RUN apt-get update \
-    && apt-get install subversion
+RUN apt-get update && apt-get install subversion
 
 VOLUME /var/svn
 
