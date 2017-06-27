@@ -1,0 +1,8 @@
+version: '2'
+services:
+  rpi-svn:
+    build: .
+    ports:
+     - "8083:80"
+    volumes:
+     - /media/usbraid/svn:/var/svn
