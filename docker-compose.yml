@@ -6,4 +6,4 @@ services:
      - "8083:3690"
     volumes:
      - /media/usbraid/svn:/var/svn
-     - /media/usbraid/rpi-svn/dav_svn.passwd:/etc/apache2/dav_svn.passwd
+     - /media/usbraid/docker/rpi-svn/dav_svn.passwd:/etc/apache2/dav_svn.passwd
