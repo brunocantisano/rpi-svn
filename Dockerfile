@@ -7,15 +7,18 @@ LABEL description Simple Subversion Container
 RUN apt-get update \
     && apt-get install subversion -y \
     && apt-get install apache2 libapache2-svn -y \
-    && mkdir ­p /var/svn \
+    && mkdir -p /var/svn \
+    && chown www-data:www-data -R /var/svn \
+    && chmod 770 -R /var/svn \
     && echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf \
-    && a2enconf fqdn
+    && a2enconf fqdn 
  
-COPY dav_svn.conf /etc/apache2/mods­available/
+COPY dav_svn.conf /etc/apache2/mods-available/
 
 RUN  /etc/init.d/apache2 restart
 
 VOLUME /var/svn
+VOLUME /etc/apache2
 
 EXPOSE 3690
 
