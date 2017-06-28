@@ -8,7 +8,7 @@ The second argument is the path where the data schould stored. (e.g.: "./run.sh 
 
 ### Create the container by hand
 Create the container and store the data outside of your container run: 
-"docker run -d -p 3690:3690 -v /data/path:/var/svn /passwd/path/dav_svn.passwd:/etc/apache2/dav_svn.passwd --name server-name paperinik/rpi-svn"
+"docker run -d -p 3690:3690 -v /data/path:/var/svn --name server-name paperinik/rpi-svn"
 
 ## Create a new repository
 "docker exec -it your-container-name svnadmin create /var/svn/repo-name"

@@ -18,7 +18,6 @@ COPY dav_svn.conf /etc/apache2/mods-available/
 RUN  /etc/init.d/apache2 restart
 
 VOLUME /var/svn
-VOLUME /etc/apache2
 
 EXPOSE 3690
 
