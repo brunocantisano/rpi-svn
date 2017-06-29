@@ -8,7 +8,7 @@ RUN apt-get update \
     && apt-get install subversion -y \
     && apt-get install apache2 libapache2-svn -y \
     && mkdir -p /var/svn \
-    && chown www-data:www-data -R /var/svn \
+    && chown www-data.www-data -R /var/svn \
     && chmod 770 -R /var/svn \
     && echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf \
     && a2enconf fqdn 
@@ -20,5 +20,7 @@ RUN  /etc/init.d/apache2 restart
 VOLUME /var/svn
 
 EXPOSE 3690
+
+ENTRYPOINT ["/etc/init.d/apache2", "start"]
 
 CMD svnserve -d -r /var/svn --log-file /dev/stdout --foreground
