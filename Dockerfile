@@ -12,7 +12,7 @@ RUN apt-get update \
     && /etc/init.d/apache2 restart \
     && mkdir -p /var/svn \
     && chown www-data:www-data -R /var/svn \
-    && chmod 770 -R /var/svn \
+    && chmod 770 -R /var/svn 
     
 VOLUME /var/svn
 
