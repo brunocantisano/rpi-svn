@@ -10,20 +10,12 @@ RUN apt-get update \
     && mkdir ­p /var/svn \
     && echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf \
     && a2enconf fqdn \
-    && /etc/init.d/apache2 restart \
     && chown www-data:www-data -R /var/svn \
-    && chmod 770 -R /var/svn \
-	&& echo "<Location /svn>" > /etc/apache2/mods-available/dav_svn.conf \
-	&& echo "DAV svn" >> /etc/apache2/mods-available/dav_svn.conf \
-	&& echo "SVNParentPath /var/svn" >> /etc/apache2/mods-available/dav_svn.conf \
-	&& echo "AuthType Basic" >> /etc/apache2/mods-available/dav_svn.conf \
-	&& echo "AuthName "Subversion Repository"" >> /etc/apache2/mods-available/dav_svn.conf \
-	&& echo "AuthUserFile /etc/apache2/dav_svn.passwd" >> /etc/apache2/mods-available/dav_svn.conf \
-	&& echo "<LimitExcept GET PROPFIND OPTIONS REPORT>" >> /etc/apache2/mods-available/dav_svn.conf \
-	&& echo "Require valid-user" >> /etc/apache2/mods-available/dav_svn.conf \
-	&& echo "</LimitExcept>" >> /etc/apache2/mods-available/dav_svn.conf \
-	&& echo "</Location>" >> /etc/apache2/mods-available/dav_svn.conf \
-	&& /etc/init.d/apache2 reload
+    && chmod 770 -R /var/svn 
+
+COPY dav_svn.conf /etc/apache2/mods-available
+
+RUN  /etc/init.d/apache2 restart
 
 VOLUME /var/svn
 
@@ -36,5 +28,6 @@ EXPOSE 80
 #HTTPS
 EXPOSE 443
 
+ENTRYPOINT apache2 start
+
 CMD svnserve -d -r /var/svn --log-file /dev/stdout --foreground
-CMD apache2 start
