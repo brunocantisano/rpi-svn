@@ -14,8 +14,7 @@ RUN apt-get update \
     && chmod 770 -R /var/svn 
 
 COPY dav_svn.conf /etc/apache2/mods-available
-
-RUN  /etc/init.d/apache2 restart
+COPY entry_point.sh /bin/sh
 
 VOLUME /var/svn
 
@@ -28,6 +27,6 @@ EXPOSE 80
 #HTTPS
 EXPOSE 443
 
-ENTRYPOINT apache2 start
+ENTRYPOINT /bin/sh/entry_point.sh
 
 CMD svnserve -d -r /var/svn --log-file /dev/stdout --foreground
