@@ -28,6 +28,4 @@ EXPOSE 80
 #HTTPS
 EXPOSE 443
 
-ENTRYPOINT /entry_point.sh
-
-CMD svnserve -d -r /var/svn --log-file /dev/stdout --foreground
+CMD /entry_point.sh
