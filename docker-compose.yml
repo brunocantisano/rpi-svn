@@ -8,3 +8,4 @@ services:
      - "443:443"
     volumes:
      - /media/usbraid/svn:/var/svn
+     - /media/usbraid/docker/svn/security:/etc/apache2
