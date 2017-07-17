@@ -7,7 +7,7 @@ appStart () {
   echo "Starting svn and apache2..."
   set +e
   svnserve -d -r /var/svn --log-file /dev/stdout --foreground
-  /etc/init.d/apache2 restart
+  service apache2 restart
 }
 
 appHelp () {
