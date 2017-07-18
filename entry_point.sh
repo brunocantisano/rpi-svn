@@ -4,15 +4,27 @@ set -e
 trap appStop SIGINT SIGTERM
 
 appStart () {
-  echo "Starting svn and apache2..."
+  echo "Starting sonarqube..."
   set +e
-  svnserve -d -r /var/svn --log-file /dev/stdout --foreground
-  service apache2 restart
+  appSvnStart
+  appApache2Start
+}
+
+appSvnStart () {
+  echo "Starting svn..."
+  set +e
+  svnserve -d -r /var/svn --foreground
+}
+
+appApache2Start () {
+  echo "Starting apache2..."
+  set +e
+ /etc/init.d/apache2 start
 }
 
 appHelp () {
   echo "Available options:"
-  echo " app:start          - Starts the sonarqube server (default)"
+  echo " app:start          - Starts the svn and apache2 server (default)"
   echo " app:help           - Displays the help"
   echo " [command]          - Execute the specified linux command eg. bash."
 }
