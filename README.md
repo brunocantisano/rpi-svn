@@ -11,7 +11,7 @@ Create the container and store the data outside of your container run:
 "docker run -d -p 3690:3690 80:80 443:443 -v /data/path:/var/svn -v /data/security:/etc/apache2 --name server-name paperinik/rpi-svn"
 
 ## Create a new repository
-"docker exec -it your-container-name svnadmin create /var/svn/repo-name"
+"docker exec -it paperinik/rpi-svn svnadmin create /var/svn/repo-name"
 
 ### Create password
-"docker exec -it your-container-name htpasswd -c /etc/apache2/dav_svn.passwd usertest"
+"docker exec -it paperinik/rpi-svn htpasswd -c /etc/apache2/dav_svn.passwd usertest"
