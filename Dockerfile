@@ -7,6 +7,8 @@ LABEL description Simple Subversion Container
 COPY dav_svn.conf /etc/apache2/mods-available
 COPY entry_point.sh /
 
+ENV APACHE_PID_FILE= 
+
 RUN apt-get update && apt-get install -y subversion apache2 libapache2-svn \
     && chmod 755 /entry_point.sh \
     && mkdir -p /var/svn \
@@ -14,6 +16,7 @@ RUN apt-get update && apt-get install -y subversion apache2 libapache2-svn \
     && chmod 770 -R /var/svn \
     && echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf \
     && a2enconf fqdn \
+    && echo "APACHE_PID_FILE=/var/run/apache2.pid" > /etc/apache2/envvars \
     && service apache2 restart 
 
 VOLUME /var/svn
