@@ -6,20 +6,18 @@ trap appStop SIGINT SIGTERM
 appStart () {
   echo "Starting sonarqube..."
   set +e
-  appSvnStart
   appApache2Start
+  appSvnStart
 }
 
 appSvnStart () {
   echo "Starting svn..."
-  set +e
   svnserve -d -r /var/svn --foreground
 }
 
 appApache2Start () {
   echo "Starting apache2..."
-  set +e
-  service apache2 restart 
+  service apache2 restart
 }
 
 appHelp () {
