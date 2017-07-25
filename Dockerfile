@@ -7,7 +7,7 @@ LABEL description Simple Subversion Container
 COPY dav_svn.conf /etc/apache2/mods-available
 COPY entry_point.sh /
 
-RUN apt-get update && apt-get install -y subversion apache2 libapache2-svn \
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils subversion apache2 libapache2-svn \
     && chmod 755 /entry_point.sh \
     && mkdir -p /var/svn \
     && chown www-data:www-data -R /var/svn \
