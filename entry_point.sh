@@ -19,7 +19,7 @@ appSvnStart () {
 appApache2Start () {
   echo "Starting apache2..."
   set +e
- /etc/init.d/apache2 start
+  service apache2 restart 
 }
 
 appHelp () {

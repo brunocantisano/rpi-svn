@@ -15,9 +15,7 @@ RUN apt-get update && apt-get install -y subversion apache2 libapache2-svn \
     && chown www-data:www-data -R /var/svn \
     && chmod 770 -R /var/svn \
     && echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf \
-    && a2enconf fqdn \
-    && echo "APACHE_PID_FILE=/var/run/apache2.pid" > /etc/apache2/envvars \
-    && service apache2 restart 
+    && a2enconf fqdn 
 
 VOLUME /var/svn
 VOLUME /etc/apache2
