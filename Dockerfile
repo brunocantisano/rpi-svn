@@ -28,5 +28,5 @@ VOLUME /var/svn /etc/apache2
 #SVN Protocol, HTTP and HTTPS
 EXPOSE 3690 80 443
 
-CMD apache2 -d --foreground
+CMD apache2 -D FOREGROUND
 CMD svnserve -d -r /var/svn/ --log-file /dev/stdout --foreground
