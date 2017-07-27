@@ -1,33 +1,33 @@
-FROM resin/rpi-raspbian
+FROM jsurf/rpi-raspbian:latest
 MAINTAINER Bruno Cantisano <bruno.cantisano@gmail.com>
 
 LABEL version latest
 LABEL description Simple Subversion Container
 
-COPY dav_svn.conf /etc/apache2/mods-available
-COPY entry_point.sh /
+ENV LANG C.UTF-8
+ENV TZ America/Brazil
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
 
-RUN apt-get update && apt-get install -y subversion apache2 libapache2-svn --no-install-recommends apt-utils \
-    && chmod 755 /entry_point.sh \
+RUN apt-get update && apt-get install -y \
+    subversion \
+    apache2 \
+    libapache2-svn \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /var/svn \
     && chown www-data:www-data -R /var/svn \
     && chmod 770 -R /var/svn \
     && echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf \
     && a2enconf fqdn 
 
-VOLUME /var/svn
-VOLUME /etc/apache2
+COPY dav_svn.conf /etc/apache2/mods-available
 
-#SVN Protocol
-EXPOSE 3690
+VOLUME /var/svn /etc/apache2
 
-#HTTP
-EXPOSE 80
+#SVN Protocol, HTTP and HTTPS
+EXPOSE 3690 80 443
 
-#HTTPS
-EXPOSE 443
-
-ENTRYPOINT ["/entry_point.sh"]
-
-CMD ["app:start"]
-
+CMD apache2 -d --foreground
+CMD svnserve -d -r /var/svn/ --log-file /dev/stdout --foreground
