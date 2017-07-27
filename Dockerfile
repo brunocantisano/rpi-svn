@@ -14,7 +14,6 @@ RUN apt-get update && apt-get install -y \
     subversion \
     apache2 \
     libapache2-svn \
-    --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /var/svn \
     && chown www-data:www-data -R /var/svn \
