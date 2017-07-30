@@ -4,7 +4,7 @@ set -e
 trap appStop SIGINT SIGTERM
 
 appStart () {
-  echo "Starting sonarqube..."
+  echo "Starting subversion..."
   set +e
   appApache2Start
   appSvnStart
@@ -12,12 +12,12 @@ appStart () {
 
 appSvnStart () {
   echo "Starting svn..."
-  svnserve -d -r /var/svn --foreground
+  svnserve -d -r /var/svn/ --log-file /dev/stdout --foreground
 }
 
 appApache2Start () {
   echo "Starting apache2..."
-  service apache2 restart
+  apache2 -D FOREGROUND
 }
 
 appHelp () {
