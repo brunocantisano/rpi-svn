@@ -17,7 +17,9 @@ appSvnStart () {
 
 appApache2Start () {
   echo "Starting apache2..."
-  apache2 -D FOREGROUND
+  #apache2 -D FOREGROUND
+  service apache2 reload
+  service apache2 restart
 }
 
 appHelp () {
