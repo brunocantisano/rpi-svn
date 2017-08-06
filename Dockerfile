@@ -22,9 +22,6 @@ COPY envvars /etc/apache2
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 
-ENV PASSWD_FILE /etc/apache2/dav_svn.passwd
-COPY $PASSWD_FILE /etc/apache2/dav_svn.passwd
-
 VOLUME /var/svn /var/log/apache2
 
 #SVN Protocol, HTTP and HTTPS
