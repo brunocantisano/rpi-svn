@@ -17,9 +17,10 @@ RUN apt-get clean \
     && echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf \
     && a2enconf fqdn
 
-COPY dav_svn.conf /etc/apache2/mods-available
-COPY envvars /etc/apache2
-COPY entrypoint.sh /entrypoint.sh
+COPY files/dav_svn.conf /etc/apache2/mods-available
+COPY files/envvars /etc/apache2
+COPY files/entrypoint.sh /entrypoint.sh
+
 RUN chmod 755 /entrypoint.sh
 
 VOLUME /var/svn /var/log/apache2
