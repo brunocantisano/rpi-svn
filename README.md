@@ -27,7 +27,7 @@ The Svn starts listening on the default Svn port of 3690 but uses port 80 for HT
 ```bash
 docker run -d -p 3690:3690 \
 -p 9403:80 -p 443:443 \
--v /media/usbraid/svn:/var/svn \
+-v /media/usbraid/svn-data:/var/svn \
 -v /media/usbraid/docker/svn/log:/var/log/apache2 \
 -v /media/usbraid/docker/svn/dav_svn.passwd:/etc/apache2/dav_svn.passwd \
 --name svnRepo paperinik/rpi-svn
