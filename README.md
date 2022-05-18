@@ -55,6 +55,7 @@ docker exec -it CONTAINER_ID svnadmin create /var/svn/repo-name
 ```bash
 docker exec -it CONTAINER_ID htpasswd -c /etc/apache2/dav_svn.passwd usertest
 ```
+----
 
 5) Permissions
 
