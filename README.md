@@ -61,6 +61,7 @@ docker exec -it CONTAINER_ID htpasswd -c /etc/apache2/dav_svn.passwd usertest
 
 ```bash
 sudo chown www-data:www-data -R svn
+sudo chown www-data:www-data -R svn-data
 sudo chmod 711 -R svn
 sudo chmod 711 -R svn-data
 ```
