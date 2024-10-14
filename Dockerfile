@@ -1,20 +1,19 @@
-FROM resin/rpi-raspbian:latest
-MAINTAINER Bruno Cardoso Cantisano <bruno.cantisano@gmail.com>
-
-LABEL version latest
-LABEL description Simple Subversion Container
+FROM arm64v8/debian:latest
+LABEL maintainer="Bruno Cardoso Cantisano <bruno.cantisano@gmail.com>" \
+      version="latest" \
+      description="Simple Subversion Container"
 
 RUN apt-get clean \
     && apt-get -y update \
     && apt-get -y install \
     subversion \
     apache2 \
-    libapache2-svn \
+    libapache2-mod-svn \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /var/svn \
     && chown -R www-data:www-data /var/svn \
     && chmod 770 -R /var/svn \
-    && echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/fqdn.conf \
+    && echo "ServerName localhost" > /etc/apache2/conf-available/fqdn.conf \
     && a2enconf fqdn
 
 COPY files/dav_svn.conf /etc/apache2/mods-available
